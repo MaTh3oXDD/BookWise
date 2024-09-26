@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link type="text/css" rel="Stylesheet" href="style.css" />
+    <title>BookWise</title>
+</head>
+<body>
+<main>
+    <aside>
+        <h2 id="BookWiseLogo">BookWise</h2>
+        <ul>
+            <li><a href="subpages/Addbook.html">Add book</a></li>
+            <li><a href="subpages/Removebook.html">Remove book</a></li>
+            <li><a href="subpages/Rentbook.html">Rent</a></li>
+            <li><a href="subpages/Clientlist.html">Clients</a></li>
+        </ul>
+    </aside>
+    <nav>
+        <div id="FourStatistic">
+            <div class="SquareStatistic">
+                <h2>Book amount</h2>
+                <div id="bookCount"></div>
+            </div>
+            <div class="SquareStatistic">
+                <h2>User amount</h2>
+                <div id="userCount"></div>
+            </div>
+            <div class="SquareStatistic">
+                <h2>Rents amount</h2>
+                <div id="rentalCount"></div>
+            </div>
+            <div class="SquareStatistic">
+                <h2>Categorys amount</h2>
+                <div id="categoryCount"></div>
+            </div>
+        </div>
+        <div id="TableDiv">
+            <div id="tableData"></div>
+        </div>
+    </nav>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Pobieranie danych dla tabeli
+        $.get("http://localhost:8080/getBookTable", function(data) {
+            $("#tableData").html(data);
+        });
+
+        // Pobieranie liczby książek
+        $.get("http://localhost:8080/getBookCount", function(data) {
+            $("#bookCount").html(data);
+        });
+
+        // Pobieranie liczby kategorii
+        $.get("http://localhost:8080/getCategoryCount", function(data) {
+            $("#categoryCount").html(data);
+        });
+
+        // Pobieranie liczby wypożyczeń
+        $.get("http://localhost:8080/getRentCount", function(data) {
+            $("#rentalCount").html(data);
+        });
+
+        // Pobieranie liczby użytkowników
+        $.get("http://localhost:8080/getUserCount", function(data) {
+            $("#userCount").html(data);
+        });
+    });
+</script>
+
+</body>
+</html>

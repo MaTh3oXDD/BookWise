@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link type="text/css" rel="Stylesheet" href="../style.css" />
+    <title>BookWise</title>
+</head>
+<body>
+<main>
+    <aside>
+        <h2 id="BookWiseLogo"><a href="../index.html">BookWise</a></h2>
+        <ul>
+            <li><a href="Addbook.html">Add book</a></li>
+            <li><a href="Removebook.html">Remove book</a></li>
+            <li><a href="Rentbook.html">Rent</a></li>
+            <li><a href="Clientlist.html">Clients</a></li>
+        </ul>
+    </aside>
+    <nav id="navClient">
+        <div id="left">
+            <form action="http://localhost:8080/addBook" method="post">
+                <h2>Dodaj nową książkę</h2>
+            
+                <label for="title">Tytuł książki:</label><br>
+                <input type="text" id="title" name="title" required><br><br>
+            
+                <label for="author">Autor:</label><br>
+                <input type="text" id="author" name="author" required><br><br>
+            
+                <label for="published_date">Data publikacji:</label><br>
+                <input type="date" id="published_date" name="published_date" required><br><br>
+            
+                <label for="category_id">ID kategorii:</label><br>
+                <input type="number" id="category_id" name="category_id" required><br><br>
+            
+                <label for="total_copies">Liczba kopii ogółem:</label><br>
+                <input type="number" id="total_copies" name="total_copies" required><br><br>
+            
+                <label for="available_copies">Liczba dostępnych kopii:</label><br>
+                <input type="number" id="available_copies" name="available_copies" required><br><br>
+            
+                <label for="description">Opis:</label><br>
+                <textarea id="description" name="description" rows="4" cols="50" placeholder="Krótki opis książki..." required></textarea><br><br>
+            
+                <button type="submit">Dodaj książkę</button>
+            </form>
+            
+        </div>
+        <div id="right">
+            <div id="tableData"></div>
+        </div>
+    </nav>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Pobieranie danych dla tabeli
+        $.get("http://localhost:8080/getTableData", function(data) {
+            $("#tableData").html(data);
+        });
+    });
+</script>
+</body>
+</html>

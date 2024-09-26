@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link type="text/css" rel="Stylesheet" href="../style.css" />
+    <title>BookWise</title>
+</head>
+<body>
+<main>
+    <aside>
+        <h2 id="BookWiseLogo"><a href="../index.html">BookWise</a></h2>
+        <ul>
+            <li><a href="Addbook.html">Add book</a></li>
+            <li><a href="Removebook.html">Remove book</a></li>
+            <li><a href="Rentbook.html">Rent</a></li>
+            <li><a href="Clientlist.html">Clients</a></li>
+        </ul>
+    </aside>
+    <nav id="navClient">
+        <form action="http://localhost:8080/addLoan" method="post">
+            <h2>Dodaj nowe wypożyczenie</h2>
+
+            <label for="user_id">Użytkownik:</label><br>
+            <select id="user_id" name="user_id" required>
+                <!-- Opcje będą dynamicznie wypełniane -->
+            </select><br><br>
+
+            <label for="book_id">Książka:</label><br>
+            <select id="book_id" name="book_id" required>
+                <!-- Opcje będą dynamicznie wypełniane -->
+            </select><br><br>
+
+            <button type="submit">Dodaj wypożyczenie</button>
+
+
+        </form>
+    </nav>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Fetchowanie użytkowników
+    fetch('http://localhost:8080/getUsers')
+        .then(response => response.json())
+        .then(data => {
+            let userSelect = document.getElementById('user_id');
+            data.forEach(user => {
+                let option = document.createElement('option');
+                option.value = user.id;
+                option.text = `${user.firstName} ${user.lastName}`;
+                userSelect.appendChild(option);
+            });
+        });
+
+    // Fetchowanie książek
+    fetch('http://localhost:8080/getBooks')
+        .then(response => response.json())
+        .then(data => {
+            let bookSelect = document.getElementById('book_id');
+            data.forEach(book => {
+                let option = document.createElement('option');
+                option.value = book.id;
+                option.text = `${book.title}`;
+                bookSelect.appendChild(option);
+            });
+        });
+</script>
+</body>
+</html>

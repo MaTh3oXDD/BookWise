@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link type="text/css" rel="Stylesheet" href="../style.css" />
+    <title>BookWise</title>
+</head>
+<body>
+<main>
+    <aside>
+        <h2 id="BookWiseLogo"><a href="../index.html">BookWise</a></h2>
+        <ul>
+            <li><a href="Addbook.html">Add book</a></li>
+            <li><a href="Removebook.html">Remove book</a></li>
+            <li><a href="Rentbook.html">Rent</a></li>
+            <li><a href="Clientlist.html">Clients</a></li>
+        </ul>
+    </aside>
+    <nav id="navClient">
+        <div id="left">
+            <form action="http://localhost:8080/deleteBook" method="post">
+                <h2>Usuń książkę</h2>
+            
+                <label for="bookId">Podaj ID książki do usunięcia:</label><br>
+                <input type="number" id="bookId" name="bookId" required><br><br>
+            
+                <button type="submit">Usuń książkę</button>
+            </form>
+            
+        </div>
+        <div id="right">
+            <div id="tableData"></div>
+        </div>
+    </nav>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Pobieranie danych dla tabeli
+        $.get("http://localhost:8080/getTableData", function(data) {
+            $("#tableData").html(data);
+        });
+    });
+</script>
+</body>
+</html>
